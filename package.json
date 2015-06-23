@@ -1,0 +1,30 @@
+{
+  "name": "history-example",
+  "version": "0.0.0",
+  "description": "History API example",
+  "main": "server.js",
+  "dependencies": {
+    "ecstatic": "^0.8.0",
+    "routes": "^2.0.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nichoth/history-example.git"
+  },
+  "keywords": [
+    "browser",
+    "history",
+    "pushState"
+  ],
+  "author": "Nick Thomas <nichoth@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nichoth/history-example/issues"
+  },
+  "homepage": "https://github.com/nichoth/history-example#readme"
+}
