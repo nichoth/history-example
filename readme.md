@@ -7,3 +7,6 @@ Example from [css-tricks](https://css-tricks.com/using-the-html5-history-api/), 
     $ cd history-example
     $ npm install
     $ node server.js
+
+todo:
+ * add rendering logic on the server, so all the endpoints work
