@@ -6,15 +6,21 @@
     imgs = document.querySelectorAll('img'),
     textWrapper = document.querySelector('.highlight'),
     content = document.querySelector('.content'),
-    defaultTitle = "Select your Ghostbuster!",
-    urlPrefix = '/character/';
+    defaultTitle = "Select your Ghostbuster!";
+
+  function renderDescription(data) {
+    var html = '<p>' + data.content + '</p>';
+    content.innerHTML = html;
+  }
 
   function updateText(content){
     textWrapper.innerHTML = content;
   }
 
   function requestContent(path){
-    $('.content').load(path);
+    $.get(path, function(resp) {
+      renderDescription(resp);
+    });
   }
 
   function removeCurrentClass(){
@@ -33,13 +39,12 @@
   container.addEventListener('click', function(e){
     if(e.target != e.currentTarget){
       e.preventDefault();
-      var name = e.target.getAttribute('data-name');
       var data = e.target.getAttribute('data-name'),
-        url = urlPrefix + data;
+        url = '/character/'+data;
       addCurrentClass(data);
       history.pushState(data, null, url);
       updateText(data);
-      requestContent('/api/character/'+name);
+      requestContent('/api/'+data);
       document.title = "Ghostbuster | " + data;
     }
     e.stopPropagation();
@@ -56,7 +61,7 @@
       document.title = defaultTitle;
     } else {
       updateText(character);
-      requestContent('/api/character/' + character);
+      requestContent('/api/' + character);
       addCurrentClass(character);
       document.title = "Ghostbuster | " + character;
     }
