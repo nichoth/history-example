@@ -1,0 +1,1 @@
+use virtual dom for the whole page. The page doesn't look right if it's rendered server side.
