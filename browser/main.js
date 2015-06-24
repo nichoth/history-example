@@ -1,3 +1,12 @@
+var render = require('../render/content.js');
+var loop = require('main-loop')({}, render, {
+  create: require('virtual-dom/create-element'),
+  diff: require('virtual-dom/diff'),
+  patch: require('virtual-dom/patch')
+});
+var $ = window.$;
+
+document.querySelector('.content').appendChild(loop.target);
 
 var container = document.querySelector('.gallery'),
   imgs = document.querySelectorAll('img'),
@@ -16,7 +25,8 @@ function updateText(content){
 
 function requestContent(path){
   $.get(path, function(resp) {
-    renderDescription(resp);
+    // renderDescription(resp);
+    loop.update(resp.content);
   });
 }
 
@@ -37,7 +47,7 @@ container.addEventListener('click', function(e){
   if(e.target != e.currentTarget){
     e.preventDefault();
     var data = e.target.getAttribute('data-name'),
-      url = data;
+      url = '/character/'+data;
     addCurrentClass(data);
     history.pushState(data, null, url);
     updateText(data);

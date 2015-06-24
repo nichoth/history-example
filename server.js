@@ -12,14 +12,17 @@ var hyperstream = require('hyperstream');
 var path = require('path');
 var fs = require('fs');
 
+var renderPage = require('./render/content.js');
+
 function db(name) {
   return {content: 'this is the description for ' + name};
 }
 
-function renderPage(data) {
-  var html = '<p>'+ data.content + '</p>';
-  return hyperstream({'.content': html});
-}
+// router.addRoute('/', function(req, res, params) {
+//   res.setHeader('Content-Type', 'text/html');
+//   fs.createReadStream(path.join(__dirname, 'public/index.html'))
+//     .pipe(process.stdout);
+// });
 
 router.addRoute('/api/:name', function(req, res, params) {
   res.setHeader("Content-Type", "application/json");
@@ -27,9 +30,11 @@ router.addRoute('/api/:name', function(req, res, params) {
 });
 
 router.addRoute('/character/:name', function(req, res, params) {
+  var content = db(params.name).content;
+  var tree = renderPage(content);
   res.setHeader('Content-Type', 'text/html');
   fs.createReadStream(path.join(__dirname, 'public/index.html'))
-    .pipe( renderPage(db(params.name)) )
+    .pipe( hyperstream({ '.content': vToHtml(tree) } ))
     .pipe(res);
 });
 
