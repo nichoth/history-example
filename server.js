@@ -2,9 +2,40 @@ var ecstatic = require('ecstatic')({root: __dirname + '/public'});
 var http = require('http');
 var router = require('routes')();
 
-router.addRoute('/api/character/:name', function(req, res, params) {
-  res.setHeader("Content-Type", "text/html");
-  res.end('<p>Character description for ' + params.name + '</p>');
+var h = require('virtual-dom/h');
+var diff = require('virtual-dom/diff');
+var patch = require('virtual-dom/patch');
+var createElement = require('virtual-dom/create-element');
+var vToHtml = require('vdom-to-html');
+
+var hyperstream = require('hyperstream');
+var path = require('path');
+var fs = require('fs');
+
+var renderPage = require('./render/content.js');
+
+function db(name) {
+  return {content: 'this is the description for ' + name};
+}
+
+// router.addRoute('/', function(req, res, params) {
+//   res.setHeader('Content-Type', 'text/html');
+//   fs.createReadStream(path.join(__dirname, 'public/index.html'))
+//     .pipe(process.stdout);
+// });
+
+router.addRoute('/api/:name', function(req, res, params) {
+  res.setHeader("Content-Type", "application/json");
+  res.end(JSON.stringify( db(params.name) ));
+});
+
+router.addRoute('/character/:name', function(req, res, params) {
+  var content = db(params.name).content;
+  var tree = renderPage(content);
+  res.setHeader('Content-Type', 'text/html');
+  fs.createReadStream(path.join(__dirname, 'public/index.html'))
+    .pipe( hyperstream({ '.content': vToHtml(tree) } ))
+    .pipe(res);
 });
 
 http.createServer(function(req, res) {
