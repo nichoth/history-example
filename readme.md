@@ -6,6 +6,7 @@ Example from [css-tricks](https://css-tricks.com/using-the-html5-history-api/), 
     $ git clone https://github.com/nichoth/history-example.git
     $ cd history-example
     $ npm install
+    $ npm run build
     $ node server.js
 
 todo:
