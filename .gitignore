@@ -80,3 +80,4 @@ node_modules
 *.db
 *.swp
 bundle.js
+public/main.js
