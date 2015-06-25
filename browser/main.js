@@ -13,9 +13,6 @@ root.appendChild(loop.target);
 
 
 var container = document.querySelector('.gallery'),
-  imgs = document.querySelectorAll('img'),
-  textWrapper = document.querySelector('.highlight'),
-  content = document.querySelector('.content'),
   defaultTitle = "Select your Ghostbuster!";
 
 function requestContent(path){
