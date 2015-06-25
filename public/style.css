@@ -7,9 +7,13 @@ body, html {
     height: 100%;
 }
 
-.page-wrap {
+#content {
     height: 100%;
     height: calc(100% - 82px);
+}
+
+.page-wrap {
+    height: 100%;
     margin: 0;
     padding: 0 0 40px 0;
     background-color: #333;
@@ -182,7 +186,7 @@ img:hover {
     border-radius: 0;
     bottom: auto;
     margin: 0;
-    background: url(/images/examples-logo.png) no-repeat;
+    background: url(/image/examples-logo.png) no-repeat;
     background-size: 100%;
     overflow: hidden;
     text-indent: -9999px;
