@@ -9,8 +9,4 @@ Example from [css-tricks](https://css-tricks.com/using-the-html5-history-api/), 
     $ npm run build
     $ node server.js
 
-todo:
- * add rendering logic on the server, so all the endpoints work
-
-
 Checkout [pjax](https://github.com/defunkt/jquery-pjax) &mdash; uses a special request header, so the server can decide whether to send full pages or partials based on the header.
