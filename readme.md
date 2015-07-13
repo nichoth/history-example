@@ -11,7 +11,10 @@ Example from [css-tricks](https://css-tricks.com/using-the-html5-history-api/), 
 
 Checkout [pjax](https://github.com/defunkt/jquery-pjax) &mdash; uses a special request header, so the server can decide whether to send full pages or partials based on the header.
 
-* Uses `virtual-dom` for all rendering
+* Use `virtual-dom` for all rendering
 * Same rendering code on client and server
 * Server serves full pages &mdash; works without any JS
-* Client runs rendering logic that replaces all the content on the page. Can we load the page more elegantly (don't re-render everything)?
+
+
+## todo
+* use `vdom-virtualize` to start the client side rendering.
